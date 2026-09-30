@@ -17,3 +17,4 @@ header{padding:64px 0 42px;display:flex;justify-content:space-between;align-item
 
 
 .profile-link{grid-column:2;justify-self:start;margin-top:12px;font-size:12px}.public-journal .journal-strip{grid-template-columns:1.6fr 1fr 1fr}.metric-baseline{white-space:pre-line}@media(max-width:540px){.journal-strip,.public-journal .journal-strip{grid-template-columns:1fr 1fr}.journal-strip>div:first-child{grid-column:1/-1}.journal-strip>div:nth-child(2){padding-left:0;border:0}.journal-strip>div:nth-child(3){padding-left:15px;border-left:1px solid var(--line)}}
+.past-years{display:grid;gap:20px}.past-year .range-summary{margin-bottom:18px}.past-year .table-scroll{margin-top:18px}@media(max-width:540px){.past-year th,.past-year td{padding:12px 8px;font-size:11px}.past-year th{font-size:9px}}

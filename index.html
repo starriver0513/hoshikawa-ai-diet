@@ -16,7 +16,7 @@
 <div id="message" role="status"></div>
 <section class="journal-strip" aria-label="記録の概要"><div><small>記録開始</small><strong id="started">—</strong></div><div><small>体重の記録</small><strong id="weigh-ins">—</strong></div><div><small>保存している項目</small><strong id="metric-count">—</strong></div></section>
 <section id="weight-section" class="section">
-<div class="section-heading"><div><p class="eyebrow">01 / WEIGHT STORY</p><h2>最初と、今を比べる。</h2></div><span class="tag">体重の全記録</span></div>
+<div class="section-heading"><div><p class="eyebrow">01 / WEIGHT STORY</p><h2>最初と、今を比べる。</h2></div><span class="tag">Withingsの全記録</span></div>
 <div id="empty" class="empty panel"><b>— kg</b><p>最初の測定データが届くと、ここから記録が始まります。</p></div>
 <div id="overview" hidden>
 <div class="before-after"><div class="before"><p class="eyebrow">BEFORE / 最初の記録</p><div class="weight-value" id="first-weight">—</div><p id="first-date"></p></div><div class="comparison-arrow" aria-hidden="true">→</div><div class="after"><p class="eyebrow">NOW / 最新の記録</p><div class="weight-value" id="latest-weight">—</div><p id="latest-date"></p></div></div>
@@ -24,17 +24,21 @@
 <div class="panel weight-chart-panel"><div class="chart-caption"><h3>体重の推移</h3><span id="weight-chart-caption" class="subtle"></span></div><div id="weight-chart"></div><p class="graph-note">点が1回の測定です。日付・時刻の間隔に沿って表示しています。</p></div>
 </div>
 </section>
+<section id="past-weight" class="section">
+<div class="section-heading"><div><p class="eyebrow">02 / PAST WEIGHT</p><h2>過去の体重</h2><p class="subtle">Withingsで記録を始める前に、手元のメモに残していた体重です。上のWithingsの記録とは分けて表示しています。時刻の記載がない記録は「—」です。</p></div><span class="tag">手記録</span></div>
+<div id="past-weights" class="past-years"><p class="subtle">過去の体重を読み込んでいます。</p></div>
+</section>
 <section class="section" id="body-section">
-<div class="section-heading"><div><p class="eyebrow">02 / BODY COMPOSITION</p><h2>体重だけじゃない、身体の記録。</h2><p class="subtle">各項目の最初・最新・前回との差を、推移と一緒に。取得済みの全項目を表示します。</p></div></div>
+<div class="section-heading"><div><p class="eyebrow">03 / BODY COMPOSITION</p><h2>体重だけじゃない、身体の記録。</h2><p class="subtle">各項目の最初・最新・前回との差を、推移と一緒に。取得済みの全項目を表示します。</p></div></div>
 <div id="metrics" class="metrics"></div>
 <p class="graph-note">各グラフの縦軸は、その項目の値に合わせた範囲です。増減は数値の変化を表し、良し悪しの判定ではありません。体脂肪率の差は「ポイント」で表示します。</p>
 </section>
 <section class="section panel history">
-<div class="section-heading"><div><p class="eyebrow">03 / EXPLORE THE HISTORY</p><h2>測定履歴を、詳しく。</h2></div><div class="controls"><label>項目<select id="metric-select" aria-label="履歴の測定項目"><option value="1">体重</option></select></label><label>表示期間<select id="range" aria-label="履歴の表示期間"><option value="0">すべて</option><option value="7">7日</option><option value="30">30日</option><option value="90">90日</option></select></label></div></div>
+<div class="section-heading"><div><p class="eyebrow">04 / EXPLORE THE HISTORY</p><h2>測定履歴を、詳しく。</h2></div><div class="controls"><label>項目<select id="metric-select" aria-label="履歴の測定項目"><option value="1">体重</option></select></label><label>表示期間<select id="range" aria-label="履歴の表示期間"><option value="0">すべて</option><option value="7">7日</option><option value="30">30日</option><option value="90">90日</option></select></label></div></div>
 <div id="range-summary" class="range-summary"></div><div id="chart"></div>
 <div class="table-scroll"><table><thead><tr><th>測定日時</th><th>測定値</th><th>直前の記録との差</th><th>記録の種類</th></tr></thead><tbody id="history-body"></tbody></table></div><button id="show-more" class="secondary more" hidden>過去の記録をさらに表示</button>
 </section>
 <section class="panel routine section"><p class="eyebrow">KEEP GOING / 日々の変化を、このページに。</p><h2>測るたび、記録が積み重なる。</h2><p class="subtle">毎日8:00・20:00（日本時間）に新しい記録を確認し、このページを更新します。測定した日付・時刻は各グラフと履歴に表示しています。</p></section>
-<footer><span>BODY JOURNAL — YOUR RECORD, OVER TIME.</span><p>Withings APIが提供する測定項目と履歴を保存します。睡眠など別の機器のデータや、APIにないアプリ独自スコアは含まれません。</p></footer>
+<footer><span>BODY JOURNAL — YOUR RECORD, OVER TIME.</span><p>Withings APIが提供する測定項目と履歴を保存します。睡眠など別の機器のデータや、APIにないアプリ独自スコアは含まれません。「過去の体重」はWithings導入前の本人の手記録です。</p></footer>
 </main>
 </body></html>

@@ -9,8 +9,10 @@ function elapsed(seconds){const s=Math.max(0,Math.floor(seconds));if(s<60)return
 function text(tag,value,cls){const e=document.createElement(tag);e.textContent=value;if(cls)e.className=cls;return e}
 function valueNode(value,unit,cls){const e=text('div',fmt(value),cls);if(unit)e.append(text('span',unit,'unit'));return e}
 function setValue(id,value,unit){const target=$(id);target.replaceChildren(document.createTextNode(fmt(value)),text('span',unit,'unit'))}
-function plot(target,records,label,unit,compact=false){
+// opts.when formats axis/aria times; opts.title labels each point (for records without a real clock time).
+function plot(target,records,label,unit,compact=false,opts={}){
   target.replaceChildren();
+  const when=opts.when||date,tickLabel=opts.when||shortDate,pointLabel=opts.title||(r=>date(r.measured_at)+' / '+fmt(r.value)+' '+unit);
   const rows=records.filter(r=>Number.isFinite(r.value)&&Number.isFinite(r.measured_at));
   if(!rows.length){target.append(text('p','この期間の記録はありません。','chart-empty'));return}
   const ns='http://www.w3.org/2000/svg',width=compact?480:900,height=compact?204:270;
@@ -23,18 +25,18 @@ function plot(target,records,label,unit,compact=false){
   const svg=document.createElementNS(ns,'svg');
   function node(tag,attrs,body){const el=document.createElementNS(ns,tag);for(const [k,v]of Object.entries(attrs))el.setAttribute(k,String(v));if(body!=null)el.textContent=body;svg.append(el);return el}
   svg.setAttribute('viewBox','0 0 '+width+' '+height);svg.setAttribute('class','chart-svg');
-  svg.setAttribute('role','img');svg.setAttribute('aria-label',label+'の推移、'+rows.length+'回の測定。'+date(first)+'から'+date(last));
+  svg.setAttribute('role','img');svg.setAttribute('aria-label',label+'の推移、'+rows.length+'回の測定。'+when(first)+'から'+when(last));
   const axisDecimals=(hi-lo)<.05?3:2;
   node('text',{x:left,y:13},unit||'値');
   for(let i=0;i<4;i++){const v=lo+(hi-lo)*i/3,yy=y(v);node('line',{x1:left,y1:yy,x2:right,y2:yy,class:'grid'});node('text',{x:left-8,y:yy+4,'text-anchor':'end'},v.toFixed(axisDecimals))}
-  const tick=(t,xx,anchor)=>node('text',{x:xx,y:height-13,'text-anchor':anchor},shortDate(t));
+  const tick=(t,xx,anchor)=>node('text',{x:xx,y:height-13,'text-anchor':anchor},tickLabel(t));
   if(span){tick(first,left,'start');tick(last,right,'end')}else tick(first,(left+right)/2,'middle');
   const coords=rows.map(r=>[x(r.measured_at),y(r.value)]);
   if(rows.length>1&&span){
     node('path',{d:'M '+coords[0][0]+' '+bottom+' L '+coords.map(p=>p.join(' ')).join(' L ')+' L '+coords[coords.length-1][0]+' '+bottom+' Z',class:'area'});
     node('polyline',{points:coords.map(p=>p.join(',')).join(' '),class:'trend'});
   }
-  rows.forEach((r,i)=>{const c=node('circle',{cx:coords[i][0],cy:coords[i][1],r:rows.length>100?2:4,class:'point'});const title=document.createElementNS(ns,'title');title.textContent=date(r.measured_at)+' / '+fmt(r.value)+' '+unit;c.append(title)});
+  rows.forEach((r,i)=>{const c=node('circle',{cx:coords[i][0],cy:coords[i][1],r:rows.length>100?2:4,class:'point'});const title=document.createElementNS(ns,'title');title.textContent=pointLabel(r);c.append(title)});
   target.append(svg);
   if(!span)target.append(text('p','この時点の記録を表示しています。次の測定から変化を比較できます。','chart-single'));
 }

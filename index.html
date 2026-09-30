@@ -1,7 +1,40 @@
 <!doctype html>
-<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>星川ユウヤのAI駆動型ダイエット</title><meta name="description" content="星川ユウヤの体重・増減・推移を公開中。体重計から届いた日々の記録。"><meta name="theme-color" content="#101926"><link rel="icon" href="favicon.svg"><link rel="stylesheet" href="style.css"><script defer src="app.js"></script></head>
-<body><header><a class="brand" href="./">YUYA HOSHIKAWA <span>WEIGHT JOURNAL</span></a><a class="x-link" href="https://x.com/starriver0513" target="_blank" rel="noopener">X @starriver0513</a></header>
-<main><section class="intro"><p class="eyebrow">星川ユウヤの公開体重ログ</p><h1>AI駆動型<br class="mobile">ダイエット、<br>始めました。</h1><p>もしよろしければ、星川の体重を<br class="mobile">定期的にこちらからチェックしてみてください！</p></section>
-<section class="measure" aria-labelledby="latest-title"><div class="section-top"><h2 id="latest-title">いまの体重</h2><span id="measured">初回データの接続準備中</span></div><div id="empty" class="empty"><span>— <small>kg</small></span><p>最初の測定データが届くと、<br>ここから記録が始まります。</p></div><figure id="card" hidden><img id="card-image" src="" alt="最新の体重と前の測定日からの増減、体重の推移" width="1200" height="675"><figcaption id="caption"></figcaption></figure></section>
-<section id="history-section" class="history" hidden><div class="section-top"><h2>これまでの記録</h2><span>各日の最後の測定値</span></div><div class="table-wrap"><table><thead><tr><th scope="col">測定日</th><th scope="col">体重</th><th scope="col">前の測定日比</th></tr></thead><tbody id="history"></tbody></table></div></section>
-<p class="update-note" id="update-note">体重計からのデータ連携を準備しています。</p></main><footer><span>YUYA HOSHIKAWA</span><span>AI駆動型ダイエット</span></footer></body></html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>星川ユウヤのAI駆動型ダイエット | BODY JOURNAL</title>
+<meta name="description" content="星川ユウヤのAI駆動型ダイエット。体重・体脂肪率・筋肉量などの変化を、測定日時とグラフで公開しています。"><meta name="theme-color" content="#183e34"><link rel="icon" href="favicon.svg">
+<link rel="stylesheet" href="style.css"><script src="journal.js" defer></script><script src="app.js" defer></script>
+</head>
+<body class="public-journal">
+<main>
+<nav class="topbar"><a class="brand" href="#top"><span class="brand-mark">↗</span> BODY JOURNAL</a><span class="privacy">YUYA HOSHIKAWA</span></nav>
+<header id="top">
+<div><p class="eyebrow">星川ユウヤの AI駆動型ダイエット</p><h1>身体の変化を、<br><em>記録で見よう。</em></h1><p class="intro">AI駆動型ダイエットを始めました。<br>もしよろしければ、星川の体重を定期的にチェックしてみてください！</p></div>
+<div class="connection"><span class="status-dot"></span><span id="status">最新の記録を読み込んでいます</span><a class="profile-link" href="https://x.com/starriver0513" target="_blank" rel="noreferrer">X @starriver0513 ↗</a></div>
+</header>
+<div id="message" role="status"></div>
+<section class="journal-strip" aria-label="記録の概要"><div><small>記録開始</small><strong id="started">—</strong></div><div><small>体重の記録</small><strong id="weigh-ins">—</strong></div><div><small>保存している項目</small><strong id="metric-count">—</strong></div></section>
+<section id="weight-section" class="section">
+<div class="section-heading"><div><p class="eyebrow">01 / WEIGHT STORY</p><h2>最初と、今を比べる。</h2></div><span class="tag">体重の全記録</span></div>
+<div id="empty" class="empty panel"><b>— kg</b><p>最初の測定データが届くと、ここから記録が始まります。</p></div>
+<div id="overview" hidden>
+<div class="before-after"><div class="before"><p class="eyebrow">BEFORE / 最初の記録</p><div class="weight-value" id="first-weight">—</div><p id="first-date"></p></div><div class="comparison-arrow" aria-hidden="true">→</div><div class="after"><p class="eyebrow">NOW / 最新の記録</p><div class="weight-value" id="latest-weight">—</div><p id="latest-date"></p></div></div>
+<div class="change-strip"><div><small>記録開始からの変化</small><strong id="start-change">—</strong></div><div><small>前回の測定からの変化</small><strong id="previous-change">—</strong><span id="previous-date"></span></div><div><small>記録している期間</small><strong id="record-span">—</strong><span>最初と最新の測定日時の差</span></div></div>
+<div class="panel weight-chart-panel"><div class="chart-caption"><h3>体重の推移</h3><span id="weight-chart-caption" class="subtle"></span></div><div id="weight-chart"></div><p class="graph-note">点が1回の測定です。日付・時刻の間隔に沿って表示しています。</p></div>
+</div>
+</section>
+<section class="section" id="body-section">
+<div class="section-heading"><div><p class="eyebrow">02 / BODY COMPOSITION</p><h2>体重だけじゃない、身体の記録。</h2><p class="subtle">各項目の最初・最新・前回との差を、推移と一緒に。取得済みの全項目を表示します。</p></div></div>
+<div id="metrics" class="metrics"></div>
+<p class="graph-note">各グラフの縦軸は、その項目の値に合わせた範囲です。増減は数値の変化を表し、良し悪しの判定ではありません。体脂肪率の差は「ポイント」で表示します。</p>
+</section>
+<section class="section panel history">
+<div class="section-heading"><div><p class="eyebrow">03 / EXPLORE THE HISTORY</p><h2>測定履歴を、詳しく。</h2></div><div class="controls"><label>項目<select id="metric-select" aria-label="履歴の測定項目"><option value="1">体重</option></select></label><label>表示期間<select id="range" aria-label="履歴の表示期間"><option value="0">すべて</option><option value="7">7日</option><option value="30">30日</option><option value="90">90日</option></select></label></div></div>
+<div id="range-summary" class="range-summary"></div><div id="chart"></div>
+<div class="table-scroll"><table><thead><tr><th>測定日時</th><th>測定値</th><th>直前の記録との差</th><th>記録の種類</th></tr></thead><tbody id="history-body"></tbody></table></div><button id="show-more" class="secondary more" hidden>過去の記録をさらに表示</button>
+</section>
+<section class="panel routine section"><p class="eyebrow">KEEP GOING / 日々の変化を、このページに。</p><h2>測るたび、記録が積み重なる。</h2><p class="subtle">毎日8:00・20:00（日本時間）に新しい記録を確認し、このページを更新します。測定した日付・時刻は各グラフと履歴に表示しています。</p></section>
+<footer><span>BODY JOURNAL — YOUR RECORD, OVER TIME.</span><p>Withings APIが提供する測定項目と履歴を保存します。睡眠など別の機器のデータや、APIにないアプリ独自スコアは含まれません。</p></footer>
+</main>
+</body></html>
